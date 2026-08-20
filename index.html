@@ -47,6 +47,9 @@
   nav .links{margin-left:auto;display:flex;gap:18px;font-size:13px;letter-spacing:1px}
   nav .links a{color:var(--muted)}
   nav .links a:hover{color:var(--cyan);text-shadow:0 0 8px var(--cyan)}
+  .hamburger{display:none;background:transparent;border:1px solid var(--line);border-radius:6px;
+    color:var(--cyan);font-size:18px;line-height:1;padding:5px 12px;cursor:pointer;font-family:var(--mono)}
+  .hamburger:hover{border-color:var(--cyan);box-shadow:0 0 12px rgba(0,255,249,.25)}
   /* ---- hero ---- */
   header{padding:90px 0 70px;position:relative}
   .tag{display:inline-block;border:1px solid var(--line);border-radius:999px;
@@ -189,9 +192,15 @@
   }
   @media(max-width:680px){
     nav .wrap{gap:10px;height:52px}
-    nav .links{display:none}          /* 手機收起段落選單，langtog 保留 */
+    .hamburger{display:block}
     .langtog{margin-left:auto}
     .langtog button{padding:7px 14px;font-size:13px}
+    /* 段落選單改成下拉面板 */
+    nav .links{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;gap:0;
+      background:rgba(5,6,10,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+      padding:4px 20px 14px}
+    nav .links.open{display:flex}
+    nav .links a{padding:13px 2px;font-size:15px;border-top:1px solid rgba(0,255,249,.08)}
     header{padding:54px 0 44px}
     section{padding:42px 0}
     .grid{grid-template-columns:1fr}
@@ -214,6 +223,7 @@
     <button data-l="en" onclick="setLang('en')">EN</button>
     <button data-l="zh" onclick="setLang('zh')">中</button>
   </div>
+  <button class="hamburger" aria-label="menu" onclick="toggleMenu()">☰</button>
 </div></nav>
 
 <header><div class="wrap">
@@ -381,6 +391,17 @@
   }
   (function(){var s=null; try{s=localStorage.getItem('lang');}catch(e){}
     setLang(s || (navigator.language && navigator.language.indexOf('zh')===0 ? 'zh' : 'en'));})();
+
+  /* mobile hamburger menu */
+  function toggleMenu(){
+    var l=document.querySelector('nav .links'); var open=l.classList.toggle('open');
+    var h=document.querySelector('.hamburger'); if(h) h.textContent=open?'✕':'☰';
+  }
+  document.querySelectorAll('nav .links a').forEach(function(a){
+    a.addEventListener('click',function(){
+      document.querySelector('nav .links').classList.remove('open');
+      var h=document.querySelector('.hamburger'); if(h) h.textContent='☰';});
+  });
 
   /* cyber cursor */
   (function(){
