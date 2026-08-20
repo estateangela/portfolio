@@ -112,8 +112,12 @@
   .proj{border:1px solid var(--line);border-radius:8px;padding:20px;position:relative;
     background:linear-gradient(180deg,rgba(10,14,26,.55),rgba(5,6,10,.2));
     transition:.2s;overflow:hidden}
-  .proj:hover{border-color:var(--cyan);transform:translateY(-4px);
-    box-shadow:0 10px 40px rgba(0,255,249,.12)}
+  .proj:hover{border-color:var(--cyan);transform:translateY(-9px);
+    box-shadow:
+      0 16px 46px rgba(0,255,249,.10),
+      0 6px 0 rgba(255,43,214,.24),
+      0 12px 0 rgba(157,75,255,.16),
+      0 18px 0 rgba(0,255,249,.09)}
   .proj:hover::after{opacity:1}
   .proj::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:.2s;
     background:linear-gradient(120deg,transparent,rgba(0,255,249,.06),transparent)}
@@ -153,10 +157,16 @@
     .cur-dot,.cur-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:10001;
       transform:translate(-50%,-50%);border-radius:50%;will-change:left,top}
     .cur-dot{width:6px;height:6px;background:var(--cyan);box-shadow:0 0 10px var(--cyan),0 0 4px #fff}
-    .cur-ring{width:28px;height:28px;border:1.5px solid var(--magenta);
+    .cur-ring{width:28px;height:28px;border:1.5px solid var(--magenta);border-radius:50%;
       box-shadow:0 0 16px rgba(255,43,214,.55);
-      transition:width .18s,height .18s,border-color .18s,box-shadow .18s}
-    .cur-ring.hover{width:52px;height:52px;border-color:var(--cyan);box-shadow:0 0 22px rgba(0,255,249,.6)}
+      transition:width .18s,height .18s,border-color .18s,box-shadow .18s,border-radius .18s}
+    .cur-ring::before,.cur-ring::after{content:"";position:absolute;background:var(--cyan);
+      opacity:0;transition:opacity .18s;box-shadow:0 0 6px var(--cyan)}
+    .cur-ring::before{left:50%;top:-7px;width:1px;height:calc(100% + 14px);transform:translateX(-50%)}
+    .cur-ring::after{top:50%;left:-7px;height:1px;width:calc(100% + 14px);transform:translateY(-50%)}
+    .cur-ring.hover{width:50px;height:50px;border-color:var(--cyan);border-radius:2px;
+      box-shadow:0 0 22px rgba(0,255,249,.5)}
+    .cur-ring.hover::before,.cur-ring.hover::after{opacity:.9}
   }
   @media(max-width:640px){.about{grid-template-columns:1fr}}
 </style>
