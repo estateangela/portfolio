@@ -187,7 +187,16 @@
       box-shadow:0 0 22px rgba(0,255,249,.5)}
     .cur-ring.hover::before,.cur-ring.hover::after{opacity:.9}
   }
-  @media(max-width:640px){.about{grid-template-columns:1fr}}
+  @media(max-width:680px){
+    nav .wrap{gap:10px;height:52px}
+    nav .links{display:none}          /* 手機收起段落選單，langtog 保留 */
+    .langtog{margin-left:auto}
+    .langtog button{padding:7px 14px;font-size:13px}
+    header{padding:54px 0 44px}
+    section{padding:42px 0}
+    .grid{grid-template-columns:1fr}
+    .wrap{padding:0 16px}
+  }
 </style>
 </head>
 <body>
