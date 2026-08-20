@@ -114,10 +114,13 @@
     transition:.2s;overflow:hidden}
   .proj:hover{border-color:var(--cyan);transform:translateY(-9px);
     box-shadow:
-      0 16px 46px rgba(0,255,249,.10),
-      0 6px 0 rgba(255,43,214,.24),
-      0 12px 0 rgba(157,75,255,.16),
-      0 18px 0 rgba(0,255,249,.09)}
+      -7px 0 0 rgba(0,255,249,.28),
+      7px 0 0 rgba(255,43,214,.28),
+      0 18px 46px rgba(0,255,249,.10);
+    animation:rgbsplit .18s steps(2) infinite}
+  @keyframes rgbsplit{
+    0%{box-shadow:-7px 0 0 rgba(0,255,249,.28),7px 0 0 rgba(255,43,214,.28),0 18px 46px rgba(0,255,249,.10)}
+    100%{box-shadow:-5px 0 0 rgba(0,255,249,.22),5px 0 0 rgba(255,43,214,.22),0 18px 46px rgba(0,255,249,.10)}}
   .proj:hover::after{opacity:1}
   .proj::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:.2s;
     background:linear-gradient(120deg,transparent,rgba(0,255,249,.06),transparent)}
