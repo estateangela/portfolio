@@ -59,14 +59,22 @@
     text-shadow:0 0 18px rgba(0,255,249,.35)}
   .glitch{position:relative}
   .glitch::before,.glitch::after{content:attr(data-text);position:absolute;left:0;top:0;
-    width:100%;overflow:hidden;clip-path:inset(0)}
-  .glitch::before{color:var(--magenta);animation:g1 3s infinite linear alternate-reverse;left:2px}
-  .glitch::after{color:var(--cyan);animation:g2 2.4s infinite linear alternate-reverse;left:-2px}
-  @keyframes g1{0%{clip-path:inset(10% 0 85% 0)}20%{clip-path:inset(80% 0 3% 0)}
-    40%{clip-path:inset(40% 0 45% 0)}60%{clip-path:inset(65% 0 20% 0)}
-    80%{clip-path:inset(20% 0 70% 0)}100%{clip-path:inset(50% 0 35% 0)}}
-  @keyframes g2{0%{clip-path:inset(70% 0 15% 0)}25%{clip-path:inset(15% 0 75% 0)}
-    50%{clip-path:inset(55% 0 30% 0)}75%{clip-path:inset(30% 0 60% 0)}100%{clip-path:inset(85% 0 5% 0)}}
+    width:100%;overflow:hidden;clip-path:inset(0);opacity:0;pointer-events:none}
+  .glitch::before{color:var(--magenta);animation:flashA 4.2s infinite steps(1)}
+  .glitch::after{color:var(--cyan);animation:flashB 4.2s infinite steps(1)}
+  /* 閃現式殘影：多數時間隱藏，間歇快閃偏移一下 */
+  @keyframes flashA{
+    0%,20%,100%{opacity:0;transform:translate(0,0);clip-path:inset(0)}
+    21%{opacity:.9;transform:translate(-5px,2px);clip-path:inset(18% 0 55% 0)}
+    23%{opacity:0}
+    60%{opacity:.85;transform:translate(-7px,-2px);clip-path:inset(62% 0 10% 0)}
+    62.5%{opacity:0}}
+  @keyframes flashB{
+    0%,40%,100%{opacity:0;transform:translate(0,0);clip-path:inset(0)}
+    41%{opacity:.9;transform:translate(6px,-2px);clip-path:inset(8% 0 62% 0)}
+    43%{opacity:0}
+    78%{opacity:.85;transform:translate(5px,3px);clip-path:inset(48% 0 22% 0)}
+    80.5%{opacity:0}}
   .subtitle{font-family:var(--disp);font-weight:700;font-size:clamp(15px,2.6vw,22px);
     letter-spacing:3px;margin:18px 0 8px;color:var(--purple);text-shadow:0 0 14px rgba(157,75,255,.5)}
   .subtitle .c{color:var(--cyan);text-shadow:0 0 14px var(--cyan)}
