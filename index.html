@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en" class="lang-en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,7 +98,7 @@
   .sh .n{color:var(--cyan);font-size:.6em;text-shadow:0 0 10px var(--cyan)}
   .sub{color:var(--muted);font-size:13px;letter-spacing:2px;margin-bottom:26px;text-transform:uppercase}
   /* about */
-  .about{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .about{max-width:840px}
   .card{border:1px solid var(--line);border-radius:8px;padding:22px;
     background:linear-gradient(180deg,rgba(10,14,26,.6),rgba(5,6,10,.3));position:relative}
   .card::before{content:"";position:absolute;top:-1px;left:14px;width:34px;height:2px;
@@ -145,10 +145,18 @@
   footer{border-top:1px solid var(--line);padding:40px 0 60px;text-align:center}
   footer .big{font-family:var(--disp);font-weight:900;font-size:clamp(22px,5vw,40px);color:#fff;
     text-shadow:0 0 20px rgba(255,43,214,.4);margin-bottom:18px}
-  footer .flinks{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
-  footer .flinks a{color:var(--muted);font-size:13px;letter-spacing:1px}
-  footer .flinks a:hover{color:var(--cyan)}
+  footer .flinks{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+  footer .flinks a{color:var(--text);font-size:17px;letter-spacing:1px;transition:.15s}
+  footer .flinks a:hover{color:var(--cyan);text-shadow:0 0 10px var(--cyan)}
   footer .cp{color:var(--muted);font-size:12px;letter-spacing:1px}
+  /* i18n */
+  html.lang-en [data-lang="zh"]{display:none}
+  html.lang-zh [data-lang="en"]{display:none}
+  .langtog{display:flex;gap:0;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .langtog button{font-family:var(--mono);background:transparent;color:var(--muted);border:0;
+    padding:5px 11px;font-size:12px;letter-spacing:1px;cursor:pointer;transition:.15s}
+  .langtog button.on{background:var(--cyan);color:#000}
+  .langtog button:hover:not(.on){color:var(--cyan)}
   .go.figbtn{color:var(--magenta)} .go.figbtn:hover{text-shadow:0 0 10px var(--magenta)}
   /* figma lightbox */
   .fig-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;
@@ -193,17 +201,25 @@
     <a href="#work">// WORK</a>
     <a href="#contact">// CONTACT</a>
   </div>
+  <div class="langtog">
+    <button data-l="en" onclick="setLang('en')">EN</button>
+    <button data-l="zh" onclick="setLang('zh')">中</button>
+  </div>
 </div></nav>
 
 <header><div class="wrap">
   <span class="tag">QA × AI Engineer</span>
   <h1 class="glitch" data-text="ANGELA SHIH">ANGELA SHIH</h1>
-  <div class="subtitle">TEST QUALITY THAT <span class="c">SCALES</span> — NOT TIED TO ONE PERSON</div>
+  <div class="subtitle">
+    <span data-lang="en">TEST QUALITY THAT <span class="c">SCALES</span> — NOT TIED TO ONE PERSON</span>
+    <span data-lang="zh">讓測試品質 <span class="c">規模化</span> — 不綁在單一個人身上</span>
+  </div>
   <p class="term">
-    <span class="p">$</span> whoami <span class="k">--role</span><br>
-    QA engineer in crypto / fintech · KYC/AML · Travel Rule · financial reconciliation.<br>
-    I turn my testing into reusable, <span class="k">AI-assisted</span> tools so quality relies on
-    tooling &amp; documented domain knowledge, not tribal memory.<span class="cursor"></span>
+    <span class="p">$</span> whoami<br>
+    <span data-lang="en">I turn my testing into reusable, <span class="k">AI-assisted</span> tools so quality relies on tooling &amp; documented domain knowledge, not tribal memory.<br>
+      <span style="color:var(--muted)"># crypto / fintech · KYC/AML · Travel Rule · financial reconciliation</span></span>
+    <span data-lang="zh">我把測試沉澱成可複用的 <span class="k">AI 輔助</span>工具，讓品質依賴工具與被記錄的 domain 知識，而非個人記憶。<br>
+      <span style="color:var(--muted)"># 加密貨幣／金融科技 · KYC/AML · Travel Rule · 財務對帳</span></span><span class="cursor"></span>
   </p>
   <div class="cta">
     <a class="btn" href="https://github.com/estateangela" target="_blank">◄ GitHub</a>
@@ -216,14 +232,15 @@
   <div class="sub">who / what / how</div>
   <div class="about">
     <div class="card">
-      <h3>◇ EN</h3>
-      <p>QA engineer building <b>QA × AI</b>. ~2 years in crypto/fintech QA, a domain that doesn't forgive: KYC/AML, Travel Rule, on-chain transfers and financial reconciliation must be <b>correct</b>, not just "green".</p>
-      <p>I built an <b>AI-assisted API testing tool</b> now part of the team's regression flow — turning my own workflow into something reusable.</p>
-    </div>
-    <div class="card">
-      <h3>◇ 中文</h3>
-      <p>主攻 <b>QA × AI</b>。約兩年加密貨幣／金融科技 QA：KYC/AML、Travel Rule、鏈上轉帳、財務對帳，都必須「<b>真的正確</b>」，而不只是測試變綠燈。</p>
-      <p>打造的 <b>AI 輔助 API 測試工具</b>已被團隊採用進回歸流程——把個人測試方法沉澱成可複用的工具，讓品質不綁在單一個人身上。</p>
+      <h3>◇ PROFILE</h3>
+      <div data-lang="en">
+        <p>QA engineer building <b>QA × AI</b>. ~2 years in crypto/fintech QA, a domain that doesn't forgive: KYC/AML, Travel Rule, on-chain transfers and financial reconciliation must be <b>correct</b>, not just "green".</p>
+        <p>I built an <b>AI-assisted API testing tool</b> now part of the team's regression flow — turning my own workflow into something reusable.</p>
+      </div>
+      <div data-lang="zh">
+        <p>主攻 <b>QA × AI</b>。約兩年加密貨幣／金融科技 QA：KYC/AML、Travel Rule、鏈上轉帳、財務對帳，都必須「<b>真的正確</b>」，而不只是測試變綠燈。</p>
+        <p>打造的 <b>AI 輔助 API 測試工具</b>已被團隊採用進回歸流程——把個人測試方法沉澱成可複用的工具，讓品質不綁在單一個人身上。</p>
+      </div>
     </div>
   </div>
 </div></section>
@@ -264,50 +281,50 @@
 
     <div class="proj">
       <div class="top"><h4>AI API Test Tool</h4><span class="badge">Python · AI</span></div>
-      <p>AI 輔助的 API 自動化測試工具，已納入團隊回歸流程，降低對個人經驗的依賴。</p>
+      <p><span data-lang="en">AI-assisted API automation tool, integrated into the team's regression flow to cut reliance on individual experience.</span><span data-lang="zh">AI 輔助的 API 自動化測試工具，已納入團隊回歸流程，降低對個人經驗的依賴。</span></p>
       <span class="go off">▸ INTERNAL / PRIVATE</span>
     </div>
 
     <div class="proj">
       <div class="top"><h4>AML 刷題練習</h4><span class="badge">Web App</span></div>
-      <p>防制洗錢題庫刷題網站：章節/隨機/錯題複習、進度儀表板、每日刷題計劃。</p>
+      <p><span data-lang="en">AML exam practice web app — chapter / random / mistake review, progress dashboard, daily study plan.</span><span data-lang="zh">防制洗錢題庫刷題網站：章節/隨機/錯題複習、進度儀表板、每日刷題計劃。</span></p>
       <span class="go off">▸ PRIVATE REPO</span>
     </div>
 
     <div class="proj">
       <div class="top"><h4>MindHelp</h4><span class="badge">Flutter · Figma</span></div>
-      <p>心理健康支援平台（團隊專案）。我負責 <b>UI 設計（Figma）</b>與 <b>Flutter 前端</b>。</p>
+      <p><span data-lang="en">Mental-health support platform (team project). I owned the <b>UI design (Figma)</b> and <b>Flutter frontend</b>.</span><span data-lang="zh">心理健康支援平台（團隊專案）。我負責 <b>UI 設計（Figma）</b>與 <b>Flutter 前端</b>。</span></p>
       <a class="go" href="https://github.com/estateangela/mindhelp" target="_blank">▸ PROJECT</a>
       &nbsp;&nbsp;<a class="go figbtn" href="#work" onclick="openFig(event)">◤ FIGMA DESIGN</a>
     </div>
 
     <div class="proj">
       <div class="top"><h4>Brainwave</h4><span class="badge prac">React · Tutorial</span></div>
-      <p>React + Vite 前端跟課練習，練習現代化 UI 與動效。</p>
+      <p><span data-lang="en">React + Vite front-end tutorial build — practicing modern UI &amp; motion.</span><span data-lang="zh">React + Vite 前端跟課練習，練習現代化 UI 與動效。</span></p>
       <a class="go" href="https://brainwave-3iq.pages.dev/" target="_blank">▸ LIVE DEMO</a>
     </div>
 
     <div class="proj">
       <div class="top"><h4>Apple Website</h4><span class="badge prac">JS · Tutorial</span></div>
-      <p>Apple 產品頁切版跟課練習，響應式與互動實作。</p>
+      <p><span data-lang="en">Apple product-page tutorial build — responsive layout &amp; interactions.</span><span data-lang="zh">Apple 產品頁切版跟課練習，響應式與互動實作。</span></p>
       <a class="go" href="https://apple-website-2n0.pages.dev/" target="_blank">▸ LIVE DEMO</a>
     </div>
 
     <div class="proj">
       <div class="top"><h4>Weather App</h4><span class="badge">TypeScript</span></div>
-      <p>TypeScript 天氣查詢應用，串接天氣 API、即時查詢與呈現。</p>
+      <p><span data-lang="en">TypeScript weather app — live weather-API queries &amp; display.</span><span data-lang="zh">TypeScript 天氣查詢應用，串接天氣 API、即時查詢與呈現。</span></p>
       <a class="go" href="https://estateangela.github.io/weather/" target="_blank">▸ LIVE DEMO</a>
     </div>
 
     <div class="proj">
       <div class="top"><h4>Appium / Robot API</h4><span class="badge">Python · QA</span></div>
-      <p>Appium 行動測試與 Robot Framework API 測試練習專案。</p>
+      <p><span data-lang="en">Appium mobile-testing &amp; Robot Framework API-testing practice projects.</span><span data-lang="zh">Appium 行動測試與 Robot Framework API 測試練習專案。</span></p>
       <a class="go" href="https://github.com/estateangela?tab=repositories" target="_blank">▸ VIEW REPOS</a>
     </div>
 
     <div class="proj">
       <div class="top"><h4>MyChatGPTbot</h4><span class="badge">Python · AI</span></div>
-      <p>串接 LLM 的聊天機器人，探索 AI 應用與自動化。</p>
+      <p><span data-lang="en">LLM-powered chatbot — exploring AI apps &amp; automation.</span><span data-lang="zh">串接 LLM 的聊天機器人，探索 AI 應用與自動化。</span></p>
       <a class="go" href="https://github.com/estateangela/MyChatGPTbot" target="_blank">▸ VIEW REPO</a>
     </div>
 
@@ -317,10 +334,11 @@
 <footer id="contact"><div class="wrap">
   <div class="big glitch" data-text="LET'S CONNECT">LET'S CONNECT</div>
   <div class="flinks">
+    <a href="mailto:estateangela@gmail.com">estateangela@gmail.com</a>
     <a href="https://github.com/estateangela" target="_blank">GITHUB ↗</a>
     <a href="https://www.linkedin.com/in/angela-shi-411853288/" target="_blank">LINKEDIN ↗</a>
   </div>
-  <div class="cp">© 2026 ANGELA SHIH · QA × AI · built with neon &amp; caffeine</div>
+  <div class="cp">© 2026 ANGELA SHIH · QA × AI</div>
 </div></footer>
 
 <div class="fig-modal" id="figModal" onclick="if(event.target===this)closeFig()">
@@ -339,6 +357,17 @@
     document.getElementById('figModal').classList.add('on');}
   function closeFig(){document.getElementById('figModal').classList.remove('on');}
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeFig();});
+
+  /* i18n language toggle */
+  function setLang(l){
+    var h=document.documentElement;
+    h.classList.remove('lang-en','lang-zh'); h.classList.add('lang-'+l);
+    h.setAttribute('lang', l==='zh'?'zh-Hant':'en');
+    try{localStorage.setItem('lang',l);}catch(e){}
+    document.querySelectorAll('.langtog button').forEach(function(b){b.classList.toggle('on',b.dataset.l===l);});
+  }
+  (function(){var s=null; try{s=localStorage.getItem('lang');}catch(e){}
+    setLang(s || (navigator.language && navigator.language.indexOf('zh')===0 ? 'zh' : 'en'));})();
 
   /* cyber cursor */
   (function(){
